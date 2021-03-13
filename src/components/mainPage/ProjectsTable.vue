@@ -1,11 +1,19 @@
-<template name="ProjectsTable">
+<template>
   <div class="ProjectsTable">
     <div class="top-actions d-flex justify-space-between mb-5">
       <div class="top-actions__newBtn">
-          <v-btn color="primary" dark>Создать проект</v-btn>
+        <v-btn color="primary" dark>Создать проект</v-btn>
       </div>
       <div class="top-actions__search">
-        <v-text-field dense height="40" hide-details placeholder="Поиск" outlined prepend-inner-icon="mdi-magnify" v-model="search"></v-text-field>
+        <v-text-field
+          dense
+          height="40"
+          hide-details
+          placeholder="Поиск"
+          outlined
+          prepend-inner-icon="mdi-magnify"
+          v-model="search"
+        ></v-text-field>
       </div>
     </div>
     <v-data-table
@@ -21,7 +29,7 @@
           <v-toolbar-title>Проекты</v-toolbar-title>
           <v-spacer></v-spacer>
           <!-- настройки показа в таблице -->
-          <v-menu offset-y class="table-settings">
+          <v-menu offset-y left class="table-settings" :close-on-content-click="false">
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 class="table-settings__btn"
@@ -36,19 +44,26 @@
             </template>
 
             <v-list>
-              <v-list-item
-                v-for="(item, i) in tableSettingsItems"
-                class="table-settings__item"
-                :key="i"
-              >
-                <v-list-item-icon>
-                  <v-icon v-text="item.icon" color="primary"></v-icon>
-                </v-list-item-icon>
-                <v-list-item-title
-                  class="table-settings__item-title"
-                  v-text="item.title"
-                ></v-list-item-title>
-              </v-list-item>
+              <v-list-item-group v-model="pickedSettings" multiple>
+                <v-list-item
+                  v-for="(item, i) in tableSettingsItems"
+                  class="table-settings__item"
+                  :key="i"
+                  active-class="transparent"
+                  @click="item.active = !item.active"
+                >
+                  <v-list-item-title
+                    class="table-settings__item-title"
+                    v-text="item.title"
+                  ></v-list-item-title>
+                  <v-list-item-action>
+                    <v-checkbox
+                      :input-value="item.active"
+                      color="primary"
+                    ></v-checkbox>
+                  </v-list-item-action>
+                </v-list-item>
+              </v-list-item-group>
             </v-list>
           </v-menu>
         </v-toolbar>
@@ -73,6 +88,7 @@ export default {
     return {
       search: "",
       projects: [],
+      pickedSettings: [],
       headers: [
         {
           text: "Номер",
@@ -81,22 +97,30 @@ export default {
         },
         { text: "Название проекта", value: "name" },
         { text: "Автор проекта", value: "bimUser.username" },
-        { text: "Параметр", value: "anonimous" },
+        { text: "Параметр", value: "anonymous" },
         { text: "Здоровье проекта", value: "opened" },
         { text: "", value: "actions", sortable: false },
       ],
       tableSettingsItems: [
         {
-          icon: "mdi-cog-outline",
-          title: "Настройки",
+          active: true,
+          title: "Номер",
         },
         {
-          icon: "mdi-brightness-6",
-          title: "Темная тема",
+          active: true,
+          title: "Название проекта",
         },
         {
-          icon: "mdi-exit-to-app",
-          title: "Выйти",
+          active: true,
+          title: "Автор проекта",
+        },
+        {
+          active: true,
+          title: "Параметр",
+        },
+        {
+          active: true,
+          title: "Здоровье проекта",
         },
       ],
     };
@@ -124,4 +148,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.ProjectsTable {
+  padding: 56px 156px;
+}
+.table-settings {
+  &__item {
+  }
+  &__title {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.03125em;
+    opacity: 0.6;
+  }
+}
 </style>

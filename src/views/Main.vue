@@ -1,20 +1,24 @@
 <template>
   <div class="main">
+    <!-- статистика -->
+    <statistics />
+    <!-- таблица проектов -->
     <projects-table />
   </div>
 </template>
 
 <script>
 import ProjectsTable from "../components/mainPage/ProjectsTable.vue";
+import Statistics from "../components/mainPage/Statistics.vue";
 export default {
-  components: { ProjectsTable },
   name: "Main",
+  components: { ProjectsTable, Statistics },
 };
 </script>
 
 <style lang="scss" scoped>
-.main{
+.main {
   width: 100vw;
-  padding: 56px 156px;
+  background: white;
 }
 </style>

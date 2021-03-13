@@ -6,7 +6,7 @@ import vuetify from './plugins/vuetify';
 import VueApexCharts from 'vue-apexcharts'
 import axios from 'axios'
 Vue.use(VueApexCharts)
-
+Vue.component('apexchart', VueApexCharts)
 Vue.config.productionTip = false
 
 if (process.env.NODE_ENV === "development") {

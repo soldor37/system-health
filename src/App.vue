@@ -28,7 +28,7 @@
     </v-app-bar>
 
     <v-main>
-      <div class="content d-flex">
+      <div class="app-content d-flex">
         <!-- боковое меню -->
         <nav-menu-left v-show="$route.name !== 'Login'"></nav-menu-left>
         <router-view></router-view>
@@ -52,7 +52,7 @@ export default {
 
 <style lang="scss">
 @import url("~@/styles/normalize.scss");
-.content{
+.app-content{
   height: 100%;
 }
 
