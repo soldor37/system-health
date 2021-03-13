@@ -5,6 +5,7 @@
       height="350"
       :options="chartOptions"
       :series="series"
+      
     ></apexchart>
   </div>
 </template>
@@ -22,7 +23,8 @@ export default {
       chartOptions: {
         chart: {
           type: "area",
-          height: 350,
+          height: 360,
+          width: 920,
           foreColor: "black",
           fontFamily: "Lato, sans-serif",
           zoom: {
@@ -71,4 +73,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.health-chart{
+    z-index: 0;
+}
 </style>

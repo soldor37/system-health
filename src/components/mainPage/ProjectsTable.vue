@@ -2,7 +2,7 @@
   <div class="ProjectsTable">
     <div class="top-actions d-flex justify-space-between mb-5">
       <div class="top-actions__newBtn">
-        <v-btn color="primary" dark>Создать проект</v-btn>
+        <v-btn color="primary" dark width="250">Создать проект</v-btn>
       </div>
       <div class="top-actions__search">
         <v-text-field
