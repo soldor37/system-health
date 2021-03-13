@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="white" dark>
+    <v-app-bar app color="white" dark v-show="$route.name !== 'Login'">
       <!-- лого -->
       <div class="d-flex align-center">
         <v-img
@@ -26,39 +26,22 @@
       <!-- выпадающее меню -->
       <user-menu></user-menu>
     </v-app-bar>
-    <!-- боковое меню -->
-    <v-navigation-drawer permanent>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="title"> Application </v-list-item-title>
-          <v-list-item-subtitle> subtext </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
 
-      <v-divider></v-divider>
-
-      <v-list dense nav>
-        <v-list-item v-for="item in items" :key="item.title" link>
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
     <v-main>
-      <router-view></router-view>
+      <div class="content d-flex">
+        <!-- боковое меню -->
+        <nav-menu-left v-show="$route.name !== 'Login'"></nav-menu-left>
+        <router-view></router-view>
+      </div>
     </v-main>
   </v-app>
 </template>
 
 <script>
 import UserMenu from "./components/header/UserMenu.vue";
+import NavMenuLeft from "./components/NavMenuLeft.vue";
 export default {
-  components: { UserMenu },
+  components: { UserMenu, NavMenuLeft },
   name: "App",
 
   data: () => ({
@@ -69,6 +52,9 @@ export default {
 
 <style lang="scss">
 @import url("~@/styles/normalize.scss");
+.content{
+  height: 100%;
+}
 
 .user-panel {
   color: black;

@@ -18,7 +18,7 @@
         v-for="(item, i) in userPanelItems"
         class="user-menu__item"
         :key="i"
-        link
+        @click="item.action == 'logout' ? logout() : null"
       >
         <v-list-item-icon>
           <v-icon v-text="item.icon" color="primary"></v-icon>
@@ -41,17 +41,31 @@ export default {
         {
           icon: "mdi-cog-outline",
           title: "Настройки",
+          action: null,
         },
         {
           icon: "mdi-brightness-6",
           title: "Темная тема",
+          action: null,
         },
         {
           icon: "mdi-exit-to-app",
           title: "Выйти",
+          action: "logout",
         },
       ],
     };
+  },
+  methods: {
+    // выход из уч. записи
+    logout() {
+      this.$store
+        .dispatch("authorization/logout")
+        .then(() => this.$router.push({ name: "Login" }))
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 };
 </script>
@@ -60,8 +74,8 @@ export default {
 .user-menu {
   &__btn {
   }
-  &__item{
-    &:hover > &-title{
+  &__item {
+    &:hover > &-title {
       opacity: 1;
     }
   }
@@ -70,7 +84,6 @@ export default {
     line-height: 24px;
     letter-spacing: 0.03125em;
     opacity: 0.6;
-    
   }
 }
 </style>
