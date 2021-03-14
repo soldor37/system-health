@@ -133,7 +133,7 @@ export default {
         "Автор проекта",
         "Параметр",
         "Здоровье проекта",
-        ""
+        "",
       ],
     };
   },
@@ -152,6 +152,19 @@ export default {
           });
       });
     },
+    initProjects() {
+      for (let i = 0; i <= 7; i++) {
+        this.projects.push({
+          code: `0000${i}`,
+          name: `Project_name_${i}`,
+          anonymous: true,
+          opened: false,
+          bimUser: {
+            username: `username_${i}`,
+          },
+        });
+      }
+    },
   },
   computed: {
     filteredHeaders() {
@@ -161,7 +174,8 @@ export default {
     },
   },
   created() {
-    this.getProjects();
+    // this.getProjects();
+    this.initProjects()
   },
 };
 </script>
