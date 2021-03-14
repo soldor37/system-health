@@ -19,6 +19,7 @@ export default {
 <style lang="scss" scoped>
 .main {
   width: 100vw;
+  max-width: 100%;
   background: white;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <!-- боковое меню -->
-    <nav-menu-left v-show="$route.name !== 'Login'"></nav-menu-left>
-    <v-app-bar app clipped-left color="white" dark v-show="$route.name !== 'Login'">
+    <nav-menu-left v-if="$route.name !== 'Login'"></nav-menu-left>
+    <v-app-bar app clipped-left color="white" dark v-if="$route.name !== 'Login'">
       <!-- лого -->
       <div class="d-flex align-center">
         <v-img
@@ -55,9 +55,6 @@ export default {
 @import url("~@/styles/normalize.scss");
 .app-content {
   height: 100%;
-}
-.main{
-  max-width: 100%;
 }
 .user-panel {
   color: black;

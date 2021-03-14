@@ -33,6 +33,7 @@ export default {
   position: fixed;
   margin: 0 !important;
   top: 0;
+  left: 0;
   background: #F3F8FD;
 }
 .login {
