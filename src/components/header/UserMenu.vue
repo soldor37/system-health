@@ -5,7 +5,7 @@
         class="user-menu__btn"
         color="primary"
         text
-        icon
+        tile
         v-bind="attrs"
         v-on="on"
       >

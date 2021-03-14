@@ -39,6 +39,8 @@ export default {
       series: [90],
       chartOptions: {
         chart: {
+           redrawOnParentResize: false,
+           redrawOnWindowResize: false,
           height: 350,
           type: "radialBar",
           toolbar: {

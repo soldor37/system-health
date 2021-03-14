@@ -1,37 +1,40 @@
 <template>
-  <v-row class="content d-flex justify-space-between align-center">
-    <v-col cols="8">
-      <div class="d-flex">
-        <!-- варианты статистики -->
-        <div class="combo-wrapper mr-4">
-          <v-combobox
-            v-model="combo1"
-            :items="statisticsVariants"
-            outlined
-            dense
-          ></v-combobox>
-        </div>
-
-        <!-- варианты статистики -->
-        <div class="combo-wrapper mr-4">
-          <v-combobox
-            v-model="combo2"
-            :items="projectsVariants"
-            outlined
-            dense
-          ></v-combobox>
-        </div>
-        <!-- выбор даты -->
-        <statistics-date-picker />
+  <div class="content">
+    <v-row>
+      <!-- варианты статистики -->
+      <div class="combo-wrapper mr-4">
+        <v-combobox
+          v-model="combo1"
+          :items="statisticsVariants"
+          outlined
+          dense
+        ></v-combobox>
       </div>
-      <!-- chart -->
-      <statistics-healthchart />
-    </v-col>
-    <!-- percent circle chart -->
-    <v-col cols="4">
-      <statistics-percent-chart />
-    </v-col>
-  </v-row>
+
+      <!-- варианты статистики -->
+      <div class="combo-wrapper mr-4">
+        <v-combobox
+          v-model="combo2"
+          :items="projectsVariants"
+          outlined
+          dense
+        ></v-combobox>
+      </div>
+      <!-- выбор даты -->
+      <statistics-date-picker
+    /></v-row>
+    <v-row class="justify-space-between">
+      <v-col cols="7">
+        <!-- chart -->
+        <statistics-healthchart
+      /></v-col>
+
+      <v-col cols="4">
+        <!-- percent circle chart -->
+        <statistics-percent-chart
+      /></v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
@@ -72,6 +75,7 @@ export default {
 .content {
   background: $color-secondary;
   padding: 56px 156px;
+  margin: -12px;
 }
 .combo-wrapper {
   width: 250px;

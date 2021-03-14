@@ -1,6 +1,8 @@
 <template>
   <v-app>
-    <v-app-bar app color="white" dark v-show="$route.name !== 'Login'">
+    <!-- боковое меню -->
+    <nav-menu-left v-show="$route.name !== 'Login'"></nav-menu-left>
+    <v-app-bar app clipped-left color="white" dark v-show="$route.name !== 'Login'">
       <!-- лого -->
       <div class="d-flex align-center">
         <v-img
@@ -28,11 +30,10 @@
     </v-app-bar>
 
     <v-main>
-      <div class="app-content d-flex">
-        <!-- боковое меню -->
-        <nav-menu-left v-show="$route.name !== 'Login'"></nav-menu-left>
-        <router-view></router-view>
-      </div>
+      <v-container ><router-view></router-view></v-container>
+      <!-- <div class="app-content d-flex">
+        
+      </div> -->
     </v-main>
   </v-app>
 </template>
@@ -52,10 +53,12 @@ export default {
 
 <style lang="scss">
 @import url("~@/styles/normalize.scss");
-.app-content{
+.app-content {
   height: 100%;
 }
-
+.main{
+  max-width: 100%;
+}
 .user-panel {
   color: black;
   border-right: 1px solid rgba($color: black, $alpha: 0.1);

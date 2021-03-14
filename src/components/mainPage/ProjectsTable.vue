@@ -17,7 +17,7 @@
       </div>
     </div>
     <v-data-table
-      :headers="headers"
+      :headers="filteredHeaders"
       :items="projects"
       :search="search"
       sort-by="calories"
@@ -29,7 +29,12 @@
           <v-toolbar-title>Проекты</v-toolbar-title>
           <v-spacer></v-spacer>
           <!-- настройки показа в таблице -->
-          <v-menu offset-y left class="table-settings" :close-on-content-click="false">
+          <v-menu
+            offset-y
+            left
+            class="table-settings"
+            :close-on-content-click="false"
+          >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 class="table-settings__btn"
@@ -43,25 +48,37 @@
               </v-btn>
             </template>
 
-            <v-list>
+            <v-list flat>
               <v-list-item-group v-model="pickedSettings" multiple>
                 <v-list-item
-                  v-for="(item, i) in tableSettingsItems"
+                  v-for="(item, i) in settingsItems"
                   class="table-settings__item"
                   :key="i"
+                  :value="item"
                   active-class="transparent"
-                  @click="item.active = !item.active"
                 >
-                  <v-list-item-title
+                  <template v-slot:default="{ active }">
+                    <v-list-item-content>
+                      <v-list-item-title v-text="item"></v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>
+                      <v-checkbox
+                        :input-value="active"
+                        color="primary"
+                      ></v-checkbox>
+                    </v-list-item-action>
+                  </template>
+                  <!-- <v-list-item-title
                     class="table-settings__item-title"
-                    v-text="item.title"
+                    v-text="item.text"
                   ></v-list-item-title>
                   <v-list-item-action>
                     <v-checkbox
                       :input-value="item.active"
                       color="primary"
                     ></v-checkbox>
-                  </v-list-item-action>
+                  </v-list-item-action> -->
                 </v-list-item>
               </v-list-item-group>
             </v-list>
@@ -69,7 +86,7 @@
         </v-toolbar>
       </template>
       <!-- Actions -->
-      <template v-slot:actions>
+      <template v-slot:[`item.actions`]>
         <v-icon small class="mr-2"> mdi-pencil </v-icon>
         <v-icon small> mdi-delete </v-icon>
       </template>
@@ -88,7 +105,7 @@ export default {
     return {
       search: "",
       projects: [],
-      pickedSettings: [],
+
       headers: [
         {
           text: "Номер",
@@ -101,27 +118,22 @@ export default {
         { text: "Здоровье проекта", value: "opened" },
         { text: "", value: "actions", sortable: false },
       ],
-      tableSettingsItems: [
-        {
-          active: true,
-          title: "Номер",
-        },
-        {
-          active: true,
-          title: "Название проекта",
-        },
-        {
-          active: true,
-          title: "Автор проекта",
-        },
-        {
-          active: true,
-          title: "Параметр",
-        },
-        {
-          active: true,
-          title: "Здоровье проекта",
-        },
+      // хедеры для вкл/откл в таблице
+      settingsItems: [
+        "Номер",
+        "Название проекта",
+        "Автор проекта",
+        "Параметр",
+        "Здоровье проекта",
+      ],
+      // показываемые хедеры
+      pickedSettings: [
+        "Номер",
+        "Название проекта",
+        "Автор проекта",
+        "Параметр",
+        "Здоровье проекта",
+        ""
       ],
     };
   },
@@ -138,6 +150,13 @@ export default {
             console.log(err);
             reject(err);
           });
+      });
+    },
+  },
+  computed: {
+    filteredHeaders() {
+      return this.headers.filter((item) => {
+        return this.pickedSettings.includes(item.text);
       });
     },
   },
