@@ -1,4 +1,5 @@
-# system-health
+# [system-health](https://soldor37.github.io/system-health/)
+Vuetify + Apexcharts
 
 ## Project setup
 ```
